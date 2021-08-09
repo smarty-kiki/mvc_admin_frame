@@ -68,6 +68,12 @@ if_not_found(function () {
 });
 
 // init controller
+include CONTROLLER_DIR.'/account.php';
+include CONTROLLER_DIR.'/role_ability.php';
+include CONTROLLER_DIR.'/role.php';
+include CONTROLLER_DIR.'/account_role.php';
+include CONTROLLER_DIR.'/ability_group.php';
+include CONTROLLER_DIR.'/ability.php';
 include CONTROLLER_DIR.'/index.php';
 
 // fix

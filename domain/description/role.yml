@@ -1,0 +1,11 @@
+---
+display_name: 角色
+structs:
+  name:
+    type: name
+    display_name: 名称
+  key:
+    type: name
+    display_name: 标识
+repeat_check_structs: []
+...
