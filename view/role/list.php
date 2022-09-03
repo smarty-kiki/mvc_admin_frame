@@ -12,6 +12,7 @@
          border-color: #666666;
          border-collapse: collapse;
          width: 100%;
+         margin-bottom: 20px;
      }
      table th {
          border-width: 1px;
@@ -38,6 +39,9 @@
         <th>ID</th>
         <th>名称</th>
         <th>标识</th>
+        <th>账户数量</th>
+        <th>权限数量</th>
+        <th>创建时间</th>
         <th>
             <a href='/roles/add'>添加</a>
         </th>
@@ -51,6 +55,15 @@
         </td>
         <td>
             {{ $role->key }}
+        </td>
+        <td>
+            {{ count($role->account_roles) }}
+        </td>
+        <td>
+            {{ count($role->role_abilities, COUNT_RECURSIVE) - count($role->role_abilities) }}
+        </td>
+        <td>
+            {{ $role->create_time }}
         </td>
         <td>
             <a href='/roles/detail/{{ $role->id }}'>详情</a>

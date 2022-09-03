@@ -2,7 +2,7 @@
 <html lang='en'>
 <head>
     <meta charset='UTF-8'>
-    <title>能力分组[{{ $ability_group->id }}]修改</title>
+    <title>修改信息</title>
     <style>
      table {
          font-family: verdana,arial,sans-serif;
@@ -12,6 +12,7 @@
          border-color: #666666;
          border-collapse: collapse;
          width: 100%;
+         margin-bottom: 20px;
      }
      table th {
          border-width: 1px;
@@ -22,24 +23,36 @@
          text-align: center;
      }
      table td {
-         border-width: 1px;
+         border-width: 0px;
          padding: 8px;
-         border-style: solid;
-         border-color: #666666;
          background-color: #ffffff;
-         text-align: center;
+         text-align: left;
+     }
+     td:first-child {
+        width: 100px;
+        text-align: right;
+     }
+     .error {
+         color: red;
+         margin-left: 10px;
      }
     </style>
 </head>
 <body>
+    <form action='' method='POST' ajax="true">
+    <input type='hidden' name='refer_url' value='{{ $refer_url }}'>
 <table>
 <tbody>
-
-    <form action='' method='POST'>
     <tr>
-        <td><span style="color:red;">*</span>名称</td>
+        <td><span style="color:red;">*</span>姓名:</td>
         <td>
-            <input type='text' name='name' value='{{ $ability_group->name }}'>
+            <input type='text' name='name' value='{{ $account->name }}'>
+        </td>
+    </tr>
+    <tr>
+        <td><span style="color:red;">*</span>邮箱:</td>
+        <td>
+            <input type='text' name='email' value='{{ $account->email }}'>
         </td>
     </tr>
     <tr>
@@ -47,13 +60,14 @@
             <a href='javascript:window.history.back(-1);'>取消</a>
         </td>
         <td>
-            <input type='submit' value='保存'>
+            <input type='submit' value='保存'><span class="error"></span>
         </td>
     </tr>
-    </form>
-
 </tbody>
 </table>
+    </form>
+    <script src="/js/zepto.min.js"></script>
+    <script src="/js/mvc_admin.lib.js"></script>
 </body>
 <script>
 </script>

@@ -49,7 +49,11 @@ if_verify(function ($action, $args) {
 
             header('Content-type: application/json');
 
-            return json($data);
+            return json([
+                'code' => 0,
+                'msg'  => '',
+                'data' => $data,
+            ]);
 
         } else {
 
@@ -61,6 +65,7 @@ if_verify(function ($action, $args) {
 });
 
 // init interceptor
+include INTERCEPTOR_DIR.'/account.php';
 
 // init 404 handler
 if_not_found(function () {
@@ -69,11 +74,7 @@ if_not_found(function () {
 
 // init controller
 include CONTROLLER_DIR.'/account.php';
-include CONTROLLER_DIR.'/role_ability.php';
 include CONTROLLER_DIR.'/role.php';
-include CONTROLLER_DIR.'/account_role.php';
-include CONTROLLER_DIR.'/ability_group.php';
-include CONTROLLER_DIR.'/ability.php';
 include CONTROLLER_DIR.'/index.php';
 
 // fix

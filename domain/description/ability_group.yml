@@ -1,7 +1,0 @@
----
-display_name: 能力分组
-structs:
-  name:
-    type: name
-repeat_check_structs: []
-...

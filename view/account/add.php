@@ -12,61 +12,61 @@
          border-color: #666666;
          border-collapse: collapse;
          width: 100%;
-     }
-     table th {
-         border-width: 1px;
-         padding: 8px;
-         border-style: solid;
-         border-color: #666666;
-         background-color: #dedede;
-         text-align: center;
+         margin-bottom: 20px;
      }
      table td {
-         border-width: 1px;
+         border-width: 0px;
          padding: 8px;
-         border-style: solid;
-         border-color: #666666;
          background-color: #ffffff;
-         text-align: center;
+         text-align: left;
+     }
+     td:first-child {
+        width: 100px;
+        text-align: right;
+     }
+     .error {
+         color: red;
+         margin-left: 10px;
      }
     </style>
 </head>
 <body>
+
+    <form action='' method='POST' ajax="true">
+    <input type='hidden' name='refer_url' value='{{ $refer_url }}'>
 <table>
 <tbody>
-
-    <form action='' method='POST'>
     <tr>
         <td><span style="color:red;">*</span>姓名</td>
         <td>
-            <input type='text' name='name'>
+            <input type='text' name='name' value=''>
         </td>
     </tr>
     <tr>
-        <td><span style="color:red;">*</span>电子邮箱</td>
+        <td><span style="color:red;">*</span>邮箱</td>
         <td>
-            <input type='text' name='email'>
+            <input type='text' name='email' value=''>
         </td>
     </tr>
     <tr>
         <td><span style="color:red;">*</span>密码</td>
         <td>
-            <input type='text' name='password'>
+            <input type='password' name='password' value=''>
         </td>
     </tr>
     <tr>
-        <td>最后登陆IP</td>
+        <td><span style="color:red;">*</span>密码重复</td>
         <td>
-            <input type='text' name='last_login_ip'>
+            <input type='password' name='password_repeat' value=''>
         </td>
     </tr>
     <tr>
         <td><span style="color:red;">*</span>管理员</td>
         <td>
             <select name='is_admin'>
-    <option value='{{ account::IS_ADMIN_1 }}'>{{ account::IS_ADMIN_MAPS[account::IS_ADMIN_1] }}</option>
-    <option value='{{ account::IS_ADMIN_ }}'>{{ account::IS_ADMIN_MAPS[account::IS_ADMIN_] }}</option>
-</select>
+                <option value='{{ account::IS_ADMIN_NO }}'>{{ account::IS_ADMIN_MAPS[account::IS_ADMIN_NO] }}</option>
+                <option value='{{ account::IS_ADMIN_YES }}'>{{ account::IS_ADMIN_MAPS[account::IS_ADMIN_YES] }}</option>
+            </select>
         </td>
     </tr>
     <tr>
@@ -74,12 +74,14 @@
             <a href='javascript:window.history.back(-1);'>取消</a>
         </td>
         <td>
-            <input type='submit' value='保存'>
+            <input type='submit' value='保存'><span class="error"></span>
         </td>
     </tr>
-    </form>
 </tbody>
 </table>
+    </form>
+    <script src="/js/zepto.min.js"></script>
+    <script src="/js/mvc_admin.lib.js"></script>
 </body>
 <script>
 </script>

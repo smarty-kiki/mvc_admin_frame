@@ -21,5 +21,7 @@ include COMMAND_DIR.'/crud.php';
 include COMMAND_DIR.'/queue.php';
 include COMMAND_DIR.'/console.php';
 
+include COMMAND_DIR.'/account.php';
+
 // fix
 command_not_found();

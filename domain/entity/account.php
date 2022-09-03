@@ -7,6 +7,7 @@ class account extends entity
         'name' => '',
         'email' => '',
         'password' => '',
+        'login_sign' => '',
         'last_login_ip' => '',
         'is_admin' => '',
     ];
@@ -15,31 +16,34 @@ class account extends entity
         'name' => 'string',
         'email' => 'string',
         'password' => 'string',
+        'login_sign' => 'string',
         'last_login_ip' => 'string',
         'is_admin' => 'enum',
     ];
 
     public static $struct_display_names = [
         'name' => '姓名',
-        'email' => '电子邮箱',
+        'email' => '邮箱',
         'password' => '密码',
+        'login_sign' => '登录标识',
         'last_login_ip' => '最后登陆IP',
         'is_admin' => '管理员',
     ];
 
 
-    const IS_ADMIN_1 = '1';
-    const IS_ADMIN_ = '';
+    const IS_ADMIN_YES = 'YES';
+    const IS_ADMIN_NO = 'NO';
 
     const IS_ADMIN_MAPS = [
-        self::IS_ADMIN_1 => '是',
-        self::IS_ADMIN_ => '否',
+        self::IS_ADMIN_YES => '是',
+        self::IS_ADMIN_NO => '否',
     ];
 
     public static $struct_is_required = [
         'name' => true,
         'email' => true,
         'password' => true,
+        'login_sign' => false,
         'last_login_ip' => false,
         'is_admin' => true,
     ];
@@ -55,8 +59,9 @@ class account extends entity
 
         $account->name = $name;
         $account->email = $email;
-        $account->password = $password;
         $account->is_admin = $is_admin;
+
+        $account->change_password($password);
 
         return $account;
     }/*}}}*/
@@ -75,25 +80,7 @@ class account extends entity
             'email' => [
                 [
                     'reg' => '/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/',
-                    'failed_message' => '不是有效的电子邮箱格式',
-                ],
-            ],
-            'password' => [
-                [
-                    'function' => function ($value) {
-                        return mb_strlen($value) <= 100;
-                    },
-                    'failed_message' => '不能超过 100 个字符',
-                ],
-                [
-                    'function' => function ($value) {
-                        return mb_strlen($value) >= 8;
-                    },
-                    'failed_message' => '不能少于 8 个字符',
-                ],
-                [
-                    'reg' => '/^(?=(?:.*?\d){1})(?=.*[a-z])(?=(?:.*?[A-Z]){1})(?=(?:.*?[!@#$%*()_+^&}{:;?.]){1})(?!.*\s)[0-9a-zA-Z!@#$%*()_+^&]*$/',
-                    'failed_message' => '包含至少 1 个特殊字符，1 个数字，1 个大写字母和 1 个小写字母',
+                    'failed_message' => '不是有效的邮箱格式',
                 ],
             ],
             'last_login_ip' => [
@@ -113,24 +100,24 @@ class account extends entity
         return self::IS_ADMIN_MAPS[$this->is_admin];
     }/*}}}*/
 
-    public function is_admin_is_1()
+    public function is_admin_is_yes()
     {/*{{{*/
-        return $this->is_admin === self::IS_ADMIN_1;
+        return $this->is_admin === self::IS_ADMIN_YES;
     }/*}}}*/
 
-    public function set_is_admin_1()
+    public function set_is_admin_yes()
     {/*{{{*/
-        return $this->is_admin = self::IS_ADMIN_1;
+        return $this->is_admin = self::IS_ADMIN_YES;
     }/*}}}*/
 
-    public function is_admin_is_()
+    public function is_admin_is_no()
     {/*{{{*/
-        return $this->is_admin === self::IS_ADMIN_;
+        return $this->is_admin === self::IS_ADMIN_NO;
     }/*}}}*/
 
-    public function set_is_admin_()
+    public function set_is_admin_no()
     {/*{{{*/
-        return $this->is_admin = self::IS_ADMIN_;
+        return $this->is_admin = self::IS_ADMIN_NO;
     }/*}}}*/
 
     public function delete()
@@ -149,4 +136,30 @@ class account extends entity
         return $this->id;
     }/*}}}*/
     /* generated code end */
+
+    public static function encrypt_password($password)
+    {/*{{{*/
+        return md5($password);
+    }/*}}}*/
+
+    public function login($last_login_ip)
+    {/*{{{*/
+        $this->last_login_ip = $last_login_ip;
+        $this->login_sign = md5($this->id.'|'.$last_login_ip.'|'.$this->password);
+    }/*}}}*/
+
+    public function password_is_right($password)
+    {/*{{{*/
+        return self::encrypt_password($password) === $this->password;
+    }/*}}}*/
+
+    public function change_password($password)
+    {/*{{{*/
+        $this->password = self::encrypt_password($password);
+    }/*}}}*/
+
+    public function logout()
+    {/*{{{*/
+        $this->login_sign = '';
+    }/*}}}*/
 }

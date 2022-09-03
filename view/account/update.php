@@ -2,7 +2,7 @@
 <html lang='en'>
 <head>
     <meta charset='UTF-8'>
-    <title>账号[{{ $account->id }}]修改</title>
+    <title>账号[{{ $account->name }}]修改</title>
     <style>
      table {
          font-family: verdana,arial,sans-serif;
@@ -12,30 +12,30 @@
          border-color: #666666;
          border-collapse: collapse;
          width: 100%;
-     }
-     table th {
-         border-width: 1px;
-         padding: 8px;
-         border-style: solid;
-         border-color: #666666;
-         background-color: #dedede;
-         text-align: center;
+         margin-bottom: 20px;
      }
      table td {
-         border-width: 1px;
+         border-width: 0px;
          padding: 8px;
-         border-style: solid;
-         border-color: #666666;
          background-color: #ffffff;
-         text-align: center;
+         text-align: left;
+     }
+     td:first-child {
+        width: 100px;
+        text-align: right;
+     }
+     .error {
+         color: red;
+         margin-left: 10px;
      }
     </style>
 </head>
 <body>
+
+    <form action='' method='POST' ajax="true">
+    <input type="hidden" name="refer_url" value="{{ $refer_url }}">
 <table>
 <tbody>
-
-    <form action='' method='POST'>
     <tr>
         <td><span style="color:red;">*</span>姓名</td>
         <td>
@@ -43,44 +43,42 @@
         </td>
     </tr>
     <tr>
-        <td><span style="color:red;">*</span>电子邮箱</td>
+        <td><span style="color:red;">*</span>邮箱</td>
         <td>
             <input type='text' name='email' value='{{ $account->email }}'>
         </td>
     </tr>
     <tr>
-        <td><span style="color:red;">*</span>密码</td>
+        <td>新密码</td>
         <td>
-            <input type='text' name='password' value='{{ $account->password }}'>
+            <input type='text' name='new_password' value=''>
         </td>
     </tr>
-    <tr>
-        <td>最后登陆IP</td>
-        <td>
-            <input type='text' name='last_login_ip' value='{{ $account->last_login_ip }}'>
-        </td>
-    </tr>
+    @if ($current_account->is_admin_is_yes())
     <tr>
         <td><span style="color:red;">*</span>管理员</td>
         <td>
             <select name='is_admin'>
-    <option value='{{ account::IS_ADMIN_1 }}' {{ $account->is_admin_is_1()? 'selected': '' }}>{{ account::IS_ADMIN_MAPS[account::IS_ADMIN_1] }}</option>
-    <option value='{{ account::IS_ADMIN_ }}' {{ $account->is_admin_is_()? 'selected': '' }}>{{ account::IS_ADMIN_MAPS[account::IS_ADMIN_] }}</option>
+    <option value='{{ account::IS_ADMIN_YES }}' {{ $account->is_admin_is_yes()? 'selected': '' }}>{{ account::IS_ADMIN_MAPS[account::IS_ADMIN_YES] }}</option>
+    <option value='{{ account::IS_ADMIN_NO }}' {{ $account->is_admin_is_no()? 'selected': '' }}>{{ account::IS_ADMIN_MAPS[account::IS_ADMIN_NO] }}</option>
 </select>
         </td>
     </tr>
+    @endif
     <tr>
         <td>
             <a href='javascript:window.history.back(-1);'>取消</a>
         </td>
         <td>
-            <input type='submit' value='保存'>
+            <input type='submit' value='保存'><span class="error"></span>
         </td>
     </tr>
-    </form>
 
 </tbody>
 </table>
+    </form>
+    <script src="/js/zepto.min.js"></script>
+    <script src="/js/mvc_admin.lib.js"></script>
 </body>
 <script>
 </script>

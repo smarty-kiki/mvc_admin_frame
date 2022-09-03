@@ -2,7 +2,7 @@
 <html lang='en'>
 <head>
     <meta charset='UTF-8'>
-    <title>能力[{{ $ability->id }}]修改</title>
+    <title>修改密码</title>
     <style>
      table {
          font-family: verdana,arial,sans-serif;
@@ -12,6 +12,7 @@
          border-color: #666666;
          border-collapse: collapse;
          width: 100%;
+         margin-bottom: 20px;
      }
      table th {
          border-width: 1px;
@@ -22,40 +23,42 @@
          text-align: center;
      }
      table td {
-         border-width: 1px;
+         border-width: 0px;
          padding: 8px;
-         border-style: solid;
-         border-color: #666666;
          background-color: #ffffff;
-         text-align: center;
+         text-align: left;
+     }
+     td:first-child {
+        width: 100px;
+        text-align: right;
+     }
+     .error {
+         color: red;
+         margin-left: 10px;
      }
     </style>
 </head>
 <body>
+    <form action='' method='POST' ajax="true">
+    <input type='hidden' name='refer_url' value='{{ $refer_url }}'>
 <table>
 <tbody>
-
-    <form action='' method='POST'>
     <tr>
-        <td>能力分组</td>
+        <td><span style="color:red;">*</span>旧密码</td>
         <td>
-            <select name='ability_group_id'>
-            @foreach ($ability_groups as $id => $ability_group)
-                <option value='{{ $id }}' {{ $id === $ability->ability_group_id?'selected':'' }}>{{ $ability_group->display_for_abilities_ability_group() }}</option>
-            @endforeach
-            </select>
+            <input type='password' name='old_password' value=''>
         </td>
     </tr>
     <tr>
-        <td><span style="color:red;">*</span>名称</td>
+        <td><span style="color:red;">*</span>新密码</td>
         <td>
-            <input type='text' name='name' value='{{ $ability->name }}'>
+            <input type='password' name='new_password' value=''>
         </td>
     </tr>
     <tr>
-        <td><span style="color:red;">*</span>标识</td>
+        <td><span style="color:red;">*</span>重复新密码</td>
         <td>
-            <input type='text' name='key' value='{{ $ability->key }}'>
+            <input type='password' name='new_password_repeat' value=''>
         </td>
     </tr>
     <tr>
@@ -63,13 +66,14 @@
             <a href='javascript:window.history.back(-1);'>取消</a>
         </td>
         <td>
-            <input type='submit' value='保存'>
+            <input type='submit' value='保存'> <span class="error"></span>
         </td>
     </tr>
-    </form>
-
 </tbody>
 </table>
+    </form>
+    <script src="/js/zepto.min.js"></script>
+    <script src="/js/mvc_admin.lib.js"></script>
 </body>
 <script>
 </script>

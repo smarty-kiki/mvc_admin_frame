@@ -7,6 +7,7 @@ create table if not exists `role` (
     `delete_time` datetime default null,
     `name` varchar(30) default null,
     `key` varchar(30) default null,
+    `role_abilities_json` json null,
     primary key (`id`)
 ) engine=innodb default charset=utf8mb4;
 

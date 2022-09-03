@@ -2,7 +2,7 @@
 <html lang='en'>
 <head>
     <meta charset='UTF-8'>
-    <title>账号[{{ $account->name }}]修改</title>
+    <title>账号[{{ $account->name }}]角色</title>
     <style>
      table {
          font-family: verdana,arial,sans-serif;
@@ -24,12 +24,18 @@
         width: 100px;
         text-align: right;
      }
+     .error {
+         color: red;
+         margin-left: 10px;
+     }
     </style>
 </head>
 <body>
+
+    <form action='' method='POST' ajax="true">
+    <input type="hidden" name="refer_url" value="{{ $refer_url }}">
 <table>
 <tbody>
-
     <tr>
         <td><span style="color:red;">*</span>姓名</td>
         <td>
@@ -43,26 +49,28 @@
         </td>
     </tr>
     <tr>
-        <td>最后登陆IP</td>
+        <td>角色</td>
         <td>
-            {{ $account->last_login_ip }}
+@foreach ($roles as $role)
+            <input id="role-{{ $role->id }}" type="checkbox" name="roles[{{ $role->id }}]" {{ array_key_exists($role->id, $roles_by_account)? 'checked': '' }}><label for="role-{{ $role->id }}">{{ $role->name }}</label>
+@endforeach
         </td>
-    </tr>
-    <tr>
-        <td><span style="color:red;">*</span>管理员</td>
-        <td>
-                {{ $account->get_is_admin_description() }}
-        </td>
+        </span>
     </tr>
     <tr>
         <td>
             <a href='javascript:window.history.back(-1);'>取消</a>
         </td>
         <td>
+            <input type='submit' value='保存'><span class="error"></span>
         </td>
     </tr>
+
 </tbody>
 </table>
+    </form>
+    <script src="/js/zepto.min.js"></script>
+    <script src="/js/mvc_admin.lib.js"></script>
 </body>
 <script>
 </script>

@@ -2,7 +2,7 @@
 
 sed_name()
 {
-    cat $1 | sed -e "s/mvc_frame/$2/g" > $1.new && mv $1.new $1
+    cat $1 | sed -e "s/mvc_admin_frame/$2/g" > $1.new && mv $1.new $1
 }
 
 if [ ! -n "$1" ] ;then
@@ -12,10 +12,10 @@ fi
 
 ROOT_DIR="$(cd "$(dirname $0)" && pwd)"/../..
 
-mv $ROOT_DIR/project/config/development/nginx/mvc_frame.conf $ROOT_DIR/project/config/development/nginx/$1.conf
-mv $ROOT_DIR/project/config/development/supervisor/mvc_frame_queue_worker.conf $ROOT_DIR/project/config/development/supervisor/$1_queue_worker.conf
-mv $ROOT_DIR/project/config/production/nginx/mvc_frame.conf $ROOT_DIR/project/config/production/nginx/$1.conf
-mv $ROOT_DIR/project/config/production/supervisor/mvc_frame_queue_worker.conf $ROOT_DIR/project/config/production/supervisor/$1_queue_worker.conf
+mv $ROOT_DIR/project/config/development/nginx/mvc_admin_frame.conf $ROOT_DIR/project/config/development/nginx/$1.conf
+mv $ROOT_DIR/project/config/development/supervisor/mvc_admin_frame_queue_worker.conf $ROOT_DIR/project/config/development/supervisor/$1_queue_worker.conf
+mv $ROOT_DIR/project/config/production/nginx/mvc_admin_frame.conf $ROOT_DIR/project/config/production/nginx/$1.conf
+mv $ROOT_DIR/project/config/production/supervisor/mvc_admin_frame_queue_worker.conf $ROOT_DIR/project/config/production/supervisor/$1_queue_worker.conf
 
 sed_name $ROOT_DIR/project/config/development/nginx/$1.conf $1
 sed_name $ROOT_DIR/project/config/development/supervisor/$1_queue_worker.conf $1
@@ -28,6 +28,10 @@ sed_name $ROOT_DIR/project/tool/start_development_server.bat $1
 sed_name $ROOT_DIR/project/tool/development/after_env_start.sh $1
 sed_name $ROOT_DIR/project/tool/production/after_push.sh $1
 sed_name $ROOT_DIR/project/tool/production/check_update.sh $1
+
+# view
+sed_name $ROOT_DIR/view/index/index.php $1
+sed_name $ROOT_DIR/view/index/login.php $1
 
 # docs
 sed_name $ROOT_DIR/README.md $1

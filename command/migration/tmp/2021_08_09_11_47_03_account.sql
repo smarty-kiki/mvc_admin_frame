@@ -8,8 +8,10 @@ create table if not exists `account` (
     `name` varchar(30) default null,
     `email` varchar(1000) default null,
     `password` varchar(100) default null,
+    `login_sign` varchar(100) default null,
     `last_login_ip` varchar(15) default null,
     `is_admin` varchar(20) not null,
+    key `idx_login_sign` (`login_sign`, `delete_time`),
     primary key (`id`)
 ) engine=innodb default charset=utf8mb4;
 

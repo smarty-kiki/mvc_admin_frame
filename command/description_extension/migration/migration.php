@@ -69,9 +69,9 @@ $relationship_type = $relationship['relationship_type'];
 @endphp
 @if ($relationship_type === 'belongs_to')
 @if ($attribute_name === $entity)
-    key `fk_{{ $attribute_name }}_idx` (`{{ $attribute_name }}_id`, `delete_time`),
+    key `fk_{{ $attribute_name }}_id` (`{{ $attribute_name }}_id`, `delete_time`),
 @else
-    key `fk_{{ $attribute_name }}_{{ $entity }}_idx` (`{{ $attribute_name }}_id`, `delete_time`),
+    key `fk_{{ $attribute_name }}_{{ $entity }}_id` (`{{ $attribute_name }}_id`, `delete_time`),
 @endif
 @endif
 @endforeach

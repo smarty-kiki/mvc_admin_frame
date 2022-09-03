@@ -1,32 +1,27 @@
 <?php
 
 return [
-    /* generated account start */
-    'ACCOUNT_NOT_FOUND' => '无效的 account',
-    'ACCOUNT_REQUIRE_NAME' => '未传入 name',
-    'ACCOUNT_REQUIRE_EMAIL' => '未传入 email',
-    'ACCOUNT_REQUIRE_PASSWORD' => '未传入 password',
+    'LOGIN_FAILED_EMAIL_EMPTY' => '邮箱未填写',
+    'LOGIN_FAILED_PASSWORD_EMPTY' => '密码未填写',
+    'LOGIN_FAILED_EMAIL_PASSWORD_NOT_FIT' => '邮箱或密码错误',
+
+    'ACCOUNT_NOT_FOUND' => '无效的账户',
+    'ACCOUNT_REQUIRE_NAME' => '姓名未填写',
+    'ACCOUNT_REQUIRE_EMAIL' => '邮箱未填写',
+    'ACCOUNT_REQUIRE_PASSWORD' => '密码未填写',
+    'ACCOUNT_REQUIRE_PASSWORD_REPEAT' => '密码重复未填写',
+    'ACCOUNT_REQUIRE_PASSWORD_REPEAT_NOT_SAME' => '两个密码需要一致',
     'ACCOUNT_REQUIRE_IS_ADMIN' => '未传入 is_admin',
-    /* generated account end */
-    /* generated role start */
-    'ROLE_NOT_FOUND' => '无效的 role',
-    'ROLE_REQUIRE_NAME' => '未传入 name',
-    'ROLE_REQUIRE_KEY' => '未传入 key',
-    /* generated role end */
-    /* generated ability start */
-    'ABILITY_NOT_FOUND' => '无效的 ability',
-    'ABILITY_REQUIRE_NAME' => '未传入 name',
-    'ABILITY_REQUIRE_KEY' => '未传入 key',
-    /* generated ability end */
-    /* generated account_role start */
+
+    'ACCOUNT_SAME_EMAIL' => '邮箱已被其他账户使用 [:account_id]',
+    'ACCOUNT_CHANGE_PASSWORD_NEED_OLD_AND_NEW' => '新旧密码都需要填写',
+    'ACCOUNT_CHANGE_PASSWORD_OLD_WRONG' => '旧密码错误',
+    'ACCOUNT_CHANGE_PASSWORD_NEW_NOT_SAME' => '两个新密码需要一致',
+
+    'ROLE_NOT_FOUND' => '无效的角色',
+    'ROLE_REQUIRE_NAME' => '名称未填写',
+    'ROLE_REQUIRE_KEY' => '标识未填写',
+
     'ACCOUNT_ROLE_NOT_FOUND' => '无效的 account_role',
-    /* generated account_role end */
-    /* generated role_ability start */
-    'ROLE_ABILITY_NOT_FOUND' => '无效的 role_ability',
-    /* generated role_ability end */
-    /* generated ability_group start */
-    'ABILITY_GROUP_NOT_FOUND' => '无效的 ability_group',
-    'ABILITY_GROUP_REQUIRE_NAME' => '未传入 name',
-    /* generated ability_group end */
     //more
 ];
