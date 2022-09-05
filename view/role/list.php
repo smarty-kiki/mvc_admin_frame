@@ -67,6 +67,7 @@
         </td>
         <td>
             <a href='/roles/detail/{{ $role->id }}'>详情</a>
+            <a href='/roles/accounts/update/{{ $role->id }}'>账户</a>
             <a href='/roles/update/{{ $role->id }}'>修改</a>
             <a href='javascript:delete_{{ $role->id }}.submit();'>删除</a>
             <form id='delete_{{ $role->id }}' action='/roles/delete/{{ $role->id }}' method='POST'></form>

@@ -2,7 +2,7 @@
 <html lang='en'>
 <head>
     <meta charset='UTF-8'>
-    <title>账户添加</title>
+    <title>角色[{{ $role->name }}]账户</title>
     <style>
      table {
          font-family: verdana,arial,sans-serif;
@@ -33,41 +33,29 @@
 <body>
 
     <form action='' method='POST' ajax="true">
-    <input type='hidden' name='refer_url' value='{{ $refer_url }}'>
+    <input type="hidden" name="refer_url" value="{{ $refer_url }}">
 <table>
 <tbody>
     <tr>
-        <td><span style="color:red;">*</span>姓名</td>
+        <td><span style="color:red;">*</span>名称</td>
         <td>
-            <input type='text' name='name' value=''>
+            {{ $role->name }}
         </td>
     </tr>
     <tr>
-        <td><span style="color:red;">*</span>邮箱</td>
+        <td><span style="color:red;">*</span>标识</td>
         <td>
-            <input type='text' name='email' value=''>
+            {{ $role->key }}
         </td>
     </tr>
     <tr>
-        <td><span style="color:red;">*</span>密码</td>
+        <td>账户</td>
         <td>
-            <input type='password' name='password' value=''>
+@foreach ($accounts as $account)
+            <input id="account-{{ $account->id }}" type="checkbox" name="accounts[{{ $account->id }}]" {{ array_key_exists($account->id, $accounts_by_role)? 'checked': '' }}><label for="account-{{ $account->id }}">{{ $account->name }}</label>
+@endforeach
         </td>
-    </tr>
-    <tr>
-        <td><span style="color:red;">*</span>密码重复</td>
-        <td>
-            <input type='password' name='password_repeat' value=''>
-        </td>
-    </tr>
-    <tr>
-        <td><span style="color:red;">*</span>管理员</td>
-        <td>
-            <select name='is_admin'>
-                <option value='{{ account::IS_ADMIN_NO }}'>{{ account::IS_ADMIN_MAPS[account::IS_ADMIN_NO] }}</option>
-                <option value='{{ account::IS_ADMIN_YES }}'>{{ account::IS_ADMIN_MAPS[account::IS_ADMIN_YES] }}</option>
-            </select>
-        </td>
+        </span>
     </tr>
     <tr>
         <td>
@@ -77,6 +65,7 @@
             <input type='submit' value='保存'><span class="error"></span>
         </td>
     </tr>
+
 </tbody>
 </table>
     </form>

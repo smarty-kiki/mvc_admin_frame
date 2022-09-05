@@ -14,7 +14,7 @@ class account_role extends entity
     ];
 
     public static $struct_display_names = [
-        'account_id' => '账号ID',
+        'account_id' => '账户ID',
         'role_id' => '角色ID',
     ];
 

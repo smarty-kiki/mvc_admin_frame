@@ -2,7 +2,7 @@
 <html lang='en'>
 <head>
     <meta charset='UTF-8'>
-    <title>账号</title>
+    <title>账户</title>
     <style>
      table {
          font-family: verdana,arial,sans-serif;

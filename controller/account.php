@@ -201,7 +201,7 @@ if_get('/accounts/roles/update/*', function ($account_id)
     $account = dao('account')->find($account_id);
     otherwise_error_code('ACCOUNT_NOT_FOUND', $account->is_not_null());
 
-    $roles_by_account = relationship_batch_load($account->account_roles, 'roles');
+    $roles_by_account = relationship_batch_load($account->account_roles, 'role');
 
     $roles = dao('role')->find_all_order_by_id_desc();
 
@@ -212,4 +212,28 @@ if_get('/accounts/roles/update/*', function ($account_id)
         'roles' => $roles,
         'roles_by_account' => $roles_by_account,
     ]);
+});/*}}}*/
+
+if_post('/accounts/roles/update/*', function ($account_id)
+{/*{{{*/
+    $current_account = get_logined_account();
+
+    $account = dao('account')->find($account_id);
+    otherwise_error_code('ACCOUNT_NOT_FOUND', $account->is_not_null());
+
+    $roles = input('roles', []);
+
+    foreach ($account->account_roles as $account_role) {
+        if (array_get($roles, $account_role->role_id) === 'false') {
+            $account_role->delete();
+        }
+        unset($roles[$account_role->role_id]);
+    }
+
+    foreach ($roles as $role_id => $res) {
+        $role = dao('role')->find($role_id);
+        account_role::create($account, $role);
+    }
+
+    return [];
 });/*}}}*/

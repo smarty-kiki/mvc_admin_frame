@@ -2,7 +2,7 @@
 <html lang='en'>
 <head>
     <meta charset='UTF-8'>
-    <title>账号[{{ $account->name }}]修改</title>
+    <title>账户[{{ $account->name }}]修改</title>
     <style>
      table {
          font-family: verdana,arial,sans-serif;

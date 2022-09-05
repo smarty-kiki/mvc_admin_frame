@@ -143,3 +143,49 @@ if_post('/roles/delete/*', function ($role_id)
 
     return redirect('/roles');
 });/*}}}*/
+
+if_get('/roles/accounts/update/*', function ($role_id)
+{/*{{{*/
+    $current_account = get_logined_account();
+
+    $refer_url = refer_uri();
+
+    $role = dao('role')->find($role_id);
+    otherwise_error_code('ROLE_NOT_FOUND', $role->is_not_null());
+
+    $accounts_by_role = relationship_batch_load($role->account_roles, 'account');
+
+    $accounts = dao('account')->find_all_order_by_id_desc();
+
+    return render('role/accounts_update', [
+        'role' => $role,
+        'current_account' => $current_account,
+        'refer_url' => $refer_url,
+        'accounts' => $accounts,
+        'accounts_by_role' => $accounts_by_role,
+    ]);
+});/*}}}*/
+
+if_post('/roles/accounts/update/*', function ($role_id)
+{/*{{{*/
+    $current_account = get_logined_account();
+
+    $role = dao('role')->find($role_id);
+    otherwise_error_code('ROLE_NOT_FOUND', $role->is_not_null());
+
+    $accounts = input('accounts', []);
+
+    foreach ($role->account_roles as $account_role) {
+        if (array_get($accounts, $account_role->account_id) === 'false') {
+            $account_role->delete();
+        }
+        unset($accounts[$account_role->role_id]);
+    }
+
+    foreach ($accounts as $account_id => $res) {
+        $account = dao('account')->find($account_id);
+        account_role::create($account, $role);
+    }
+
+    return [];
+});/*}}}*/
