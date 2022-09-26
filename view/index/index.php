@@ -27,7 +27,7 @@
         .menu-container ul {
             list-style-type: none;
             margin: 0px;
-            padding: 20px;
+            padding: 15px;
         }
         .menu-container li {
             font-size: 14px;
@@ -40,7 +40,7 @@
         .base-container ul {
             list-style-type: none;
             margin: 0px;
-            padding: 20px;
+            padding: 15px;
         }
         .base-container li {
             font-size: 14px;
@@ -62,15 +62,15 @@
     <div class="left-container">
         <div class="menu-container">
             <ul>
-                <li><a target="right" href="/accounts">账户管理</a></li>
-                <li><a target="right" href="/roles">角色管理</a></li>
+                @if (role_ability_need('account_setting.account_list')) <li><a target="right" href="/accounts">账户管理</a></li> @endif
+                @if (role_ability_need('role_setting.role_list')) <li><a target="right" href="/roles">角色管理</a></li> @endif
             </ul>
         </div>
         <div class="base-container">
             <ul>
                 <li><a target="right" href="/accounts/update/mine_info">修改信息</a></li>
                 <li><a target="right" href="/accounts/update/mine_password">修改密码</a></li>
-                <li> <form id="logout" action="/logout" method="POST"></form> <a href="###" onclick="logout.submit()">登出 "{{ $account->name }}"</a> </li>
+                <li> <form id="logout" action="/logout" method="POST"></form> <a href="###" onclick="logout.submit()">登出 [{{ $account->name }}]</a> </li>
             </ul>
         </div>
     </div>

@@ -2,14 +2,21 @@
 
 function get_logined_account($redirect = true)
 {/*{{{*/
-    $login_sign = cookie('sign');
+    static $container = null;
 
-    $account = dao('account')->find_by_login_sign($login_sign);
+    if (is_null($container)) {
 
-    if ($account->is_null() && $redirect) {
+        $login_sign = cookie('sign');
 
-        redirect('/login?refer_url='.uri());
+        $account = dao('account')->find_by_login_sign($login_sign);
+
+        if ($account->is_null() && $redirect) {
+
+            redirect('/login?refer_url='.uri());
+        }
+
+        $container = $account;
     }
 
-    return $account;
+    return $container;
 }/*}}}*/

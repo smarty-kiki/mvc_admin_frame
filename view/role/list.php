@@ -43,7 +43,7 @@
         <th>权限数量</th>
         <th>创建时间</th>
         <th>
-            <a href='/roles/add'>添加</a>
+            @if (role_ability_need('role_setting.role_add')) <a href='/roles/add'>添加</a> @endif
         </th>
     </tr>
 </thead>
@@ -66,10 +66,10 @@
             {{ $role->create_time }}
         </td>
         <td>
-            <a href='/roles/detail/{{ $role->id }}'>详情</a>
-            <a href='/roles/accounts/update/{{ $role->id }}'>账户</a>
-            <a href='/roles/update/{{ $role->id }}'>修改</a>
-            <a href='javascript:delete_{{ $role->id }}.submit();'>删除</a>
+            @if (role_ability_need('role_setting.role_detail')) <a href='/roles/detail/{{ $role->id }}'>详情</a> @endif
+            @if (role_ability_need('role_setting.role_account')) <a href='/roles/accounts/update/{{ $role->id }}'>账户</a> @endif
+            @if (role_ability_need('role_setting.role_update')) <a href='/roles/update/{{ $role->id }}'>修改</a> @endif
+            @if (role_ability_need('role_setting.role_delete')) <a href='javascript:delete_{{ $role->id }}.submit();'>删除</a> @endif
             <form id='delete_{{ $role->id }}' action='/roles/delete/{{ $role->id }}' method='POST'></form>
         </td>
     </tr>

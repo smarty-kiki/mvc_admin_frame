@@ -41,6 +41,12 @@ if_has_exception(function ($ex) {
 
 if_verify(function ($action, $args) {
 
+    $can_access = role_ability_request_can_access();
+
+    if (! $can_access) {
+        return '没有权限';
+    }
+
     return unit_of_work(function () use ($action, $args){
 
         $data = call_user_func_array($action, $args);
@@ -66,6 +72,7 @@ if_verify(function ($action, $args) {
 
 // init interceptor
 include INTERCEPTOR_DIR.'/account.php';
+include INTERCEPTOR_DIR.'/request_ability.php';
 
 // init 404 handler
 if_not_found(function () {

@@ -44,7 +44,7 @@
         <th>创建时间</th>
         <th>修改时间</th>
         <th>
-            <a href='/accounts/add'>添加</a>
+            @if (role_ability_need('account_setting.account_add')) <a href='/accounts/add'>添加</a> @endif
         </th>
     </tr>
 </thead>
@@ -70,11 +70,11 @@
             {{ $account->update_time }}
         </td>
         <td>
-            <a href='/accounts/detail/{{ $account->id }}'>详情</a>
-            <a href='/accounts/roles/update/{{ $account->id }}'>角色</a>
-            <a href='javascript:logout_{{ $account->id }}.submit();'>登出</a>
-            <a href='/accounts/update/{{ $account->id }}'>修改</a>
-            <a href='javascript:delete_{{ $account->id }}.submit();'>删除</a>
+            @if (role_ability_need('account_setting.account_detail')) <a href='/accounts/detail/{{ $account->id }}'>详情</a> @endif
+            @if (role_ability_need('account_setting.role_account')) <a href='/accounts/roles/update/{{ $account->id }}'>角色</a> @endif
+            @if (role_ability_need('account_setting.account_logout')) <a href='javascript:logout_{{ $account->id }}.submit();'>登出</a> @endif
+            @if (role_ability_need('account_setting.account_update')) <a href='/accounts/update/{{ $account->id }}'>修改</a> @endif
+            @if (role_ability_need('account_setting.account_delete')) <a href='javascript:delete_{{ $account->id }}.submit();'>删除</a> @endif
             <form id='logout_{{ $account->id }}' action='/accounts/logout/{{ $account->id }}' method='POST'></form>
             <form id='delete_{{ $account->id }}' action='/accounts/delete/{{ $account->id }}' method='POST'></form>
         </td>
