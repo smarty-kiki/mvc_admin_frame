@@ -6,14 +6,15 @@ if_get('/accounts', function ()
 
     return render('account/list', [
         'accounts' => dao('account')->find_all_order_by_id_desc(),
+        'current_account' => $current_account,
     ]);
 });/*}}}*/
 
 if_get('/accounts/add', function ()
 {/*{{{*/
     $current_account = get_logined_account();
-
     $refer_url = refer_uri();
+
     return render('account/add', [
         'refer_url' => $refer_url,
     ]);
@@ -128,7 +129,6 @@ if_post('/accounts/update/mine_password', function ()
 if_get('/accounts/update/*', function ($account_id)
 {/*{{{*/
     $current_account = get_logined_account();
-
     $refer_url = refer_uri();
 
     $account = dao('account')->find($account_id);
