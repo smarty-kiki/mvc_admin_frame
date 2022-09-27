@@ -53,7 +53,7 @@ class account extends entity
         $this->has_many('account_roles', 'account_role');
     }/*}}}*/
 
-    public static function create($name, $email, $password, $is_admin)
+    public static function create($name, $email, $password, $is_admin): account
     {/*{{{*/
         $account = parent::init();
 
@@ -95,27 +95,27 @@ class account extends entity
         return $validators[$property] ?? false;
     }/*}}}*/
 
-    public function get_is_admin_description()
+    public function get_is_admin_description(): string
     {/*{{{*/
         return self::IS_ADMIN_MAPS[$this->is_admin];
     }/*}}}*/
 
-    public function is_admin_is_yes()
+    public function is_admin_is_yes(): bool
     {/*{{{*/
         return $this->is_admin === self::IS_ADMIN_YES;
     }/*}}}*/
 
-    public function set_is_admin_yes()
+    public function set_is_admin_yes(): string
     {/*{{{*/
         return $this->is_admin = self::IS_ADMIN_YES;
     }/*}}}*/
 
-    public function is_admin_is_no()
+    public function is_admin_is_no(): bool
     {/*{{{*/
         return $this->is_admin === self::IS_ADMIN_NO;
     }/*}}}*/
 
-    public function set_is_admin_no()
+    public function set_is_admin_no(): string
     {/*{{{*/
         return $this->is_admin = self::IS_ADMIN_NO;
     }/*}}}*/
@@ -137,7 +137,7 @@ class account extends entity
     }/*}}}*/
     /* generated code end */
 
-    public static function encrypt_password($password)
+    public static function encrypt_password($password): string
     {/*{{{*/
         return md5($password);
     }/*}}}*/
@@ -148,7 +148,7 @@ class account extends entity
         $this->login_sign = md5($this->id.'|'.$last_login_ip.'|'.$this->password);
     }/*}}}*/
 
-    public function password_is_right($password)
+    public function password_is_right($password): bool
     {/*{{{*/
         return self::encrypt_password($password) === $this->password;
     }/*}}}*/

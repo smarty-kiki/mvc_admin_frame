@@ -15,7 +15,7 @@ if_get('/login', function ()
     $refer_url     = input('refer_url', '/');
     $email         = input('email', '');
 
-    $current_account = get_logined_account(false);
+    $current_account = get_logined_account();
     if ($current_account->is_not_null()) {
         return redirect($refer_url);
     }
@@ -29,7 +29,7 @@ if_get('/login', function ()
 
 if_post('/login', function ()
 {/*{{{*/
-    list($email, $password, $refer_url) = input_list('email', 'password', 'refer_url');
+    list($email, $password) = input_list('email', 'password');
     otherwise_error_code('LOGIN_FAILED_EMAIL_EMPTY', not_empty($email));
     otherwise_error_code('LOGIN_FAILED_PASSWORD_EMPTY', not_empty($password));
 
@@ -50,14 +50,4 @@ if_post('/logout', function ()
     $account->logout();
 
     return redirect('/');
-});/*}}}*/
-
-if_get('/health_check', function ()
-{/*{{{*/
-    return 'ok';
-});/*}}}*/
-
-if_get('/error_code_maps', function ()
-{/*{{{*/
-    return config('error_code');
 });/*}}}*/

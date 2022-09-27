@@ -33,7 +33,7 @@ class role extends entity
         $this->has_many('account_roles', 'account_role');
     }/*}}}*/
 
-    public static function create($name, $key, array $role_abilities)
+    public static function create($name, $key, array $role_abilities): role
     {/*{{{*/
         $role = parent::init();
 

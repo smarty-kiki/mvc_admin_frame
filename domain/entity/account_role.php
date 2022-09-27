@@ -30,7 +30,7 @@ class account_role extends entity
         $this->belongs_to('role');
     }/*}}}*/
 
-    public static function create(account $account, role $role)
+    public static function create(account $account, role $role): account_role
     {/*{{{*/
         $account_role = parent::init();
 
@@ -48,12 +48,12 @@ class account_role extends entity
         return $validators[$property] ?? false;
     }/*}}}*/
 
-    public function belongs_to_account(account $account)
+    public function belongs_to_account(account $account): bool
     {/*{{{*/
         return $this->account_id == $account->id;
     }/*}}}*/
 
-    public function belongs_to_role(role $role)
+    public function belongs_to_role(role $role): bool
     {/*{{{*/
         return $this->role_id == $role->id;
     }/*}}}*/

@@ -2,8 +2,6 @@
 
 if_get('/roles', function ()
 {/*{{{*/
-    $current_account = get_logined_account();
-
     $roles = dao('role')->find_all_order_by_id_desc();
 
     relationship_batch_load($roles, 'account_roles');
@@ -15,8 +13,6 @@ if_get('/roles', function ()
 
 if_get('/roles/add', function ()
 {/*{{{*/
-    $current_account = get_logined_account();
-
     $ability_configs = config('ability');
 
     $refer_url = refer_uri();
@@ -29,8 +25,6 @@ if_get('/roles/add', function ()
 
 if_post('/roles/add', function ()
 {/*{{{*/
-    $current_account = get_logined_account();
-
     $ability_configs = config('ability');
 
     $role_abilities = [];
@@ -66,8 +60,6 @@ if_post('/roles/add', function ()
 
 if_get('/roles/detail/*', function ($role_id)
 {/*{{{*/
-    $current_account = get_logined_account();
-
     $ability_configs = config('ability');
 
     $role = dao('role')->find($role_id);
@@ -81,8 +73,6 @@ if_get('/roles/detail/*', function ($role_id)
 
 if_get('/roles/update/*', function ($role_id)
 {/*{{{*/
-    $current_account = get_logined_account();
-
     $ability_configs = config('ability');
 
     $refer_url = refer_uri();
@@ -134,8 +124,6 @@ if_post('/roles/update/*', function ($role_id)
 
 if_post('/roles/delete/*', function ($role_id)
 {/*{{{*/
-    $current_account = get_logined_account();
-
     $role = dao('role')->find($role_id);
     otherwise_error_code('ROLE_NOT_FOUND', $role->is_not_null());
 
@@ -168,8 +156,6 @@ if_get('/roles/accounts/update/*', function ($role_id)
 
 if_post('/roles/accounts/update/*', function ($role_id)
 {/*{{{*/
-    $current_account = get_logined_account();
-
     $role = dao('role')->find($role_id);
     otherwise_error_code('ROLE_NOT_FOUND', $role->is_not_null());
 

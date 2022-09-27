@@ -2,6 +2,10 @@
 
 function role_ability_need($need_ability)
 {
+    if ($need_ability === '*') {
+        return true;
+    }
+
     $account = get_logined_account();
     if ($account->is_null()) {
         return false;

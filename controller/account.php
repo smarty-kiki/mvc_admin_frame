@@ -12,7 +12,6 @@ if_get('/accounts', function ()
 
 if_get('/accounts/add', function ()
 {/*{{{*/
-    $current_account = get_logined_account();
     $refer_url = refer_uri();
 
     return render('account/add', [
@@ -22,8 +21,6 @@ if_get('/accounts/add', function ()
 
 if_post('/accounts/add', function ()
 {/*{{{*/
-    $current_account = get_logined_account();
-
     $name = input('name');
     otherwise_error_code('ACCOUNT_REQUIRE_NAME', $name);
 
@@ -57,8 +54,6 @@ if_post('/accounts/add', function ()
 
 if_get('/accounts/detail/*', function ($account_id)
 {/*{{{*/
-    $current_account = get_logined_account();
-
     $account = dao('account')->find($account_id);
     otherwise_error_code('ACCOUNT_NOT_FOUND', $account->is_not_null());
 
@@ -143,8 +138,6 @@ if_get('/accounts/update/*', function ($account_id)
 
 if_post('/accounts/update/*', function ($account_id)
 {/*{{{*/
-    $current_account = get_logined_account();
-
     list($name, $email, $new_password, $is_admin) = input_list('name', 'email', 'new_password', 'is_admin');
 
     $account = dao('account')->find($account_id);
@@ -170,8 +163,6 @@ if_post('/accounts/update/*', function ($account_id)
 
 if_post('/accounts/delete/*', function ($account_id)
 {/*{{{*/
-    $current_account = get_logined_account();
-
     $account = dao('account')->find($account_id);
     otherwise_error_code('ACCOUNT_NOT_FOUND', $account->is_not_null());
 
@@ -182,8 +173,6 @@ if_post('/accounts/delete/*', function ($account_id)
 
 if_post('/accounts/logout/*', function ($account_id)
 {/*{{{*/
-    $current_account = get_logined_account();
-
     $account = dao('account')->find($account_id);
     otherwise_error_code('ACCOUNT_NOT_FOUND', $account->is_not_null());
 
@@ -216,8 +205,6 @@ if_get('/accounts/roles/update/*', function ($account_id)
 
 if_post('/accounts/roles/update/*', function ($account_id)
 {/*{{{*/
-    $current_account = get_logined_account();
-
     $account = dao('account')->find($account_id);
     otherwise_error_code('ACCOUNT_NOT_FOUND', $account->is_not_null());
 

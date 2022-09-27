@@ -35,19 +35,17 @@ if_has_exception(function ($ex) {
     } else {
 
         header('Content-type: text/html');
-        return $error_info['code'].' '.$error_info['message'];
+        return
+            '<span style="color: red;">'.$error_info['message'].'</span>'.
+            '<span style="color: gray;">'.$error_info['code'].'</span>';
     }
 });
 
 if_verify(function ($action, $args) {
 
-    $can_access = role_ability_request_can_access();
-
-    if (! $can_access) {
-        return '没有权限';
-    }
-
     return unit_of_work(function () use ($action, $args) {
+
+        otherwise_error_code('ACCOUNT_ROLE_NEED_REQUEST_ABILITY', role_ability_request_can_access());
 
         $data = call_user_func_array($action, $args);
 
