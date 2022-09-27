@@ -1,9 +1,12 @@
 if_get('/{{ english_word_pluralize($entity_name) }}/add', function ()
 {/*{^^{^^{*/
+    $current_account = get_logined_account();
+    $refer_url = refer_uri();
+
     return render('{{ $entity_name }}/add', [
 @foreach ($relationship_infos['relationships'] as $attribute_name => $relationship)
 @if ($relationship['relationship_type'] === 'belongs_to')
-        '{{ english_word_pluralize($attribute_name) }}' => dao('{{ $relationship['entity'] }}')->find_all(),
+        '{{ english_word_pluralize($attribute_name) }}' => dao('{{ $relationship['entity'] }}')->find_all_order_by_id_desc(),
 @endif
 @endforeach
     ]);
@@ -11,6 +14,8 @@ if_get('/{{ english_word_pluralize($entity_name) }}/add', function ()
 
 if_post('/{{ english_word_pluralize($entity_name) }}/add', function ()
 {/*{^^{^^{*/
+    $current_account = get_logined_account();
+
 @php
 $input_infos = [];
 $list_infos = [];
@@ -60,10 +65,10 @@ foreach ($repeat_check_structs as $struct_name) {
 
 @endif
 @if (empty($param_infos))
-    ${{ $entity_name }} = {{ $entity_name }}::create();
+    $new_{{ $entity_name }} = {{ $entity_name }}::create();
 
 @else
-    ${{ $entity_name }} = {{ $entity_name }}::create(
+    $new_{{ $entity_name }} = {{ $entity_name }}::create(
         {{ implode(",\n        ", $param_infos)."\n" }}
     );
 
@@ -73,5 +78,7 @@ foreach ($repeat_check_structs as $struct_name) {
     {{ $setting_line."\n" }}
 @endforeach
 @endif
-    return redirect(input('refer_url', '/{{ english_word_pluralize($entity_name) }}'));
+    return [
+        'id' => $new_{{ $entity_name }}->id,
+    ];
 });/*}}}*/

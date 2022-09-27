@@ -1,7 +1,10 @@
 if_get('/{{ english_word_pluralize($entity_name) }}/update/*', function (${{ $entity_name }}_id)
 {/*{^^{^^{*/
+    $current_account = get_logined_account();
+    $refer_url = refer_uri();
+
     ${{ $entity_name }} = dao('{{ $entity_name }}')->find(${{ $entity_name }}_id);
-    otherwise(${{ $entity_name }}->is_not_null(), '{{ $entity_name }} 不存在');
+    otherwise_error_code('{{ strtoupper($entity_name.'_NOT_FOUND') }}', ${{ $entity_name }}->is_not_null());
 
     return render('{{ $entity_name }}/update', [
         '{{ $entity_name }}' => ${{ $entity_name }},
@@ -15,6 +18,8 @@ if_get('/{{ english_word_pluralize($entity_name) }}/update/*', function (${{ $en
 
 if_post('/{{ english_word_pluralize($entity_name) }}/update/*', function (${{ $entity_name }}_id)
 {/*{^^{^^{*/
+    $current_account = get_logined_account();
+
 @php
 $list_infos = [];
 foreach ($entity_info['structs'] as $struct_name => $struct) {
@@ -63,5 +68,5 @@ $entity = $relationship['entity'];
     if (not_null(${{ $struct_name }})) { ${{ $entity_name }}->{{ $struct_name }} = ${{ $struct_name }}; }
 @endforeach
 
-    return redirect(input('refer_url', '/{{ english_word_pluralize($entity_name) }}'));
+    return [];
 });/*}}}*/

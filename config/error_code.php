@@ -23,5 +23,9 @@ return [
     'ROLE_REQUIRE_KEY' => '标识未填写',
 
     'ACCOUNT_ROLE_NOT_FOUND' => '无效的 account_role',
+
+    /* generated {{ $entity_name }} start */
+    /* generated {{ $entity_name }} end */
+
     //more
 ];

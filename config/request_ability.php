@@ -48,4 +48,8 @@ return [
         'POST' => 'account_setting.account_logout',
     ],
 
+    /* generated {{ $entity_name }} start */
+    /* generated {{ $entity_name }} end */
+
+    //more
 ];
