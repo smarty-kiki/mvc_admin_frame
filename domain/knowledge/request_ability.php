@@ -11,7 +11,11 @@ function role_ability_need($need_ability)
         return false;
     }
 
-    $roles = relationship_batch_load($account, 'account_roles.role');
+    static $roles = null;
+    if (is_null($roles)) {
+        $roles = relationship_batch_load($account, 'account_roles.role');
+    }
+
     $can_access = false;
 
     foreach ($roles as $role) {
