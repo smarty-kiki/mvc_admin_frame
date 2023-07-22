@@ -27,8 +27,5 @@ return [
     'RULE_NOT_FOUND_IN_REQUEST_ABILITY_CONFIG' => '未配置页面所需权限 [:method :rule] ',
     'ACCOUNT_ROLE_NEED_REQUEST_ABILITY' => '没有权限',
 
-    /* generated {{ $entity_name }} start */
-    /* generated {{ $entity_name }} end */
-
     //more
 ];

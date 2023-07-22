@@ -35,9 +35,5 @@ return [
         ],
     ],
 
-    /* generated {{ $entity_name }} start */
-    /* generated {{ $entity_name }} end */
-
     //more
-
 ];
