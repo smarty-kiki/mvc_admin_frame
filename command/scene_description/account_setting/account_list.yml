@@ -1,0 +1,30 @@
+---
+display_name: 商品列表
+main_entity: account
+view:
+  layout: sift_dirctory_list
+  option:
+    sift:
+      - account_id
+      - is_admin
+    dirctory:
+      by: account.account_category
+      display: account.account_category.name
+      can_edit: true
+    list:
+      header_operation:
+        - name: 添加
+          scene: account_add
+      column:
+        - id
+        - name
+        - age
+        - email
+        - create_time
+      column_order: account.order
+      row_operation:
+        - name: 编辑
+          scene: account_edit
+        - name: 删除
+          scene: account_delete
+...
