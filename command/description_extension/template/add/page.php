@@ -33,7 +33,7 @@
 <body>
 
     <form action='' method='POST' ajax="true">
-        <input type='hidden' name='refer_url' value='{{ $refer_url }}'>
+        <input type='hidden' name='refer_url' value='^^{^^{ $refer_url ^^}^^}'>
 @foreach ($relationship_infos['relationships'] as $attribute_name => $relationship)
 @if ($relationship['relationship_type'] === 'belongs_to')
         <table>

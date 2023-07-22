@@ -33,7 +33,7 @@
 <body>
 
     <form action='' method='POST' ajax="true">
-        <input type="hidden" name="refer_url" value="{{ $refer_url }}">
+        <input type="hidden" name="refer_url" value="^^{^^{ $refer_url ^^}^^}">
         <table>
             <tbody>
 @foreach ($relationship_infos['relationships'] as $attribute_name => $relationship)

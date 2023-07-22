@@ -88,7 +88,7 @@ then
 
             controller_file_old=$controller_diff_dir/$entity_name.php.old
             controller_file_new=$controller_diff_dir/$entity_name.php.new
-            controller_file_diff=$ROOT_DIR/controller/$entity_name.diff.php
+            controller_file_diff=$ROOT_DIR/controller/$entity_name.change.php
             output_controller_file=$controller_file
             if [ -r $output_controller_file ]
             then
@@ -104,7 +104,7 @@ then
                 if [ ! -r $controller_file_old ] || test "`diff -u $controller_file $controller_file_old`"
                 then
                     cp $controller_file_new $controller_file_old
-                    controller_file_diff_str=`diff -u $controller_file_new $controller_file`
+                    controller_file_diff_str=`diff -u $controller_file $controller_file_new`
                     if test "$controller_file_diff_str"
                     then
                         echo "$controller_file_diff_str" > $controller_file_diff
@@ -128,7 +128,7 @@ then
             view_file_diff_new_dir=$view_diff_new_dir/$entity_name
             view_file_root_dir=$ROOT_DIR/view
             view_file_dir=$view_file_root_dir/$entity_name
-            view_file_diff_dir=$view_file_dir.diff
+            view_file_diff_dir=$view_file_dir.change
             output_view_file_dir=$view_file_root_dir
             if [ -d $view_file_dir ]
             then
@@ -163,7 +163,7 @@ then
                             target_view_file=/dev/null
                         fi
 
-                        view_file_diff_str=`diff -u $view_file_diff_new_dir/$view_file $target_view_file`
+                        view_file_diff_str=`diff -u $target_view_file $view_file_diff_new_dir/$view_file`
                         if test "$view_file_diff_str"
                         then
                             mkdir -p $view_file_diff_dir
