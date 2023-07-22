@@ -283,5 +283,5 @@ then
     done
 
     /bin/bash $ROOT_DIR/project/tool/classmap.sh $ROOT_DIR/domain | echo_filter
-    ENV=$env /usr/bin/php $ROOT_DIR/public/cli.php migrate -tmp_files | echo_filter
+    ENV=$env /usr/bin/php $ROOT_DIR/public/cli.php migrate -with_tmp_files | echo_filter
 fi
